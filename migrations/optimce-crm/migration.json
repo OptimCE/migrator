@@ -1,0 +1,19 @@
+{
+  "migrations": [
+    {
+      "version": 1,
+      "file": "001_init_schema_version.sql",
+      "description": "Bootstrap schema_version table"
+    },
+    {
+      "version":2,
+      "file": "002_sharing_operation_municipality.sql",
+      "description": "Sharing operation municipality feature"
+    },
+    {
+      "version":3,
+      "file": "003_municipality_inserts.sql",
+      "description": "Insert almost all the belgium municipalities (50-ish not available)"
+    }
+  ]
+}

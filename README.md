@@ -1,4 +1,4 @@
-# OptimCE - Updater
+# OptimCE - Migrator
 
 Applies sequential SQL migrations to OptimCE databases. Each target database tracks its
 schema with a `schema_version` table; the updater compares the current version against a
@@ -9,8 +9,8 @@ No Alembic. SQLAlchemy async + asyncpg, plain `.sql` files, hand-curated manifes
 ## Layout
 
 ```
-optimce-updater/
-  updater.py
+optimce-migrator/
+  migrator.py
   database.config                       # which databases to manage
   migrations/
     <database-name>/
@@ -75,13 +75,13 @@ itself cleanly on a fresh database.
 export OPTIMCE_CRM_DATABASE_URL=postgresql+asyncpg://user:pass@localhost:5432/crm_db
 
 # preview pending migrations
-python updater.py --dry-run
+python migrator.py --dry-run
 
 # apply to every database in database.config
-python updater.py
+python migrator.py
 
 # apply to one database only
-python updater.py --database optimce-crm
+python migrator.py --database optimce-crm
 ```
 
 Flags:
@@ -95,7 +95,7 @@ Flags:
 - Each migration runs in its own transaction together with the `INSERT INTO schema_version`
   row, so a partial apply cannot record a false success.
 - If a migration fails, prior migrations stay applied; fix the SQL (or the data) and
-  re-run — the updater will resume from the last recorded version.
+  re-run — the migrator will resume from the last recorded version.
 - Multi-database runs are sequential. One database's failure does not abort the others;
   the script exits non-zero if any database failed and lists which ones.
 

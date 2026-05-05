@@ -120,12 +120,11 @@ async def get_current_version(engine: AsyncEngine) -> int:
 async def apply_migration(engine: AsyncEngine, migration: Migration) -> None:
     sql_text = migration.file.read_text(encoding="utf-8")
     async with engine.begin() as conn:
-        await conn.exec_driver_sql(sql_text)
+        raw = await conn.get_raw_connection()
+        await raw.driver_connection.execute(sql_text)  # asyncpg simple query, multi-statement OK
         await conn.execute(
-            text(
-                "INSERT INTO schema_version (version, description) "
-                "VALUES (:version, :description)"
-            ),
+            text("INSERT INTO schema_version (version, description) "
+                 "VALUES (:version, :description)"),
             {"version": migration.version, "description": migration.description},
         )
 

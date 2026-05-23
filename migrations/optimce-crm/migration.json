@@ -14,6 +14,11 @@
       "version":3,
       "file": "003_municipality_inserts.sql",
       "description": "Insert almost all the belgium municipalities (50-ish not available)"
+    },
+    {
+      "version":4,
+      "file": "004_community_subscription.sql",
+      "description": "Implement community subscription feature in the crm_backend"
     }
   ]
 }

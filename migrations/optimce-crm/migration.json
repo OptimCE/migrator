@@ -19,6 +19,11 @@
       "version":4,
       "file": "004_community_subscription.sql",
       "description": "Implement community subscription feature in the crm_backend"
+    },
+    {
+      "version":5,
+      "file": "005_audit_log.sql",
+      "description": "Implement the new audit log feature related table"
     }
   ]
 }

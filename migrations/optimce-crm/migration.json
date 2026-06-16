@@ -24,6 +24,11 @@
       "version":5,
       "file": "005_audit_log.sql",
       "description": "Implement the new audit log feature related table"
+    },
+    {
+      "version":6,
+      "file": "006_notification.sql",
+      "description": "Implement the new notification feature"
     }
   ]
 }

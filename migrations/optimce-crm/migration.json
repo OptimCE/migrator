@@ -29,6 +29,16 @@
       "version":6,
       "file": "006_notification.sql",
       "description": "Implement the new notification feature"
+    },
+    {
+      "version":7,
+      "file": "007_community_regulator.sql",
+      "description": "Implement the community regulators"
+    },
+    {
+      "version":8,
+      "file": "008_community_bank_legal_info.sql",
+      "description": "Implement the bank legal information related to a community"
     }
   ]
 }

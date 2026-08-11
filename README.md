@@ -73,7 +73,7 @@ itself cleanly on a fresh database.
 
 # point at the target database
 export OPTIMCE_CRM_DATABASE_URL=postgresql+asyncpg://user:pass@localhost:5432/crm_db
-
+export OPTIMCE_BILLING_DATABASE_URL=postgresql+asyncpg://user:pass@localhost:5432/billing_db
 # preview pending migrations
 python migrator.py --dry-run
 

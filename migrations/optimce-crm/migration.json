@@ -41,9 +41,9 @@
       "description": "Implement the bank legal information related to a community"
     },
     {
-      "version":9,
+      "version": 9,
       "file": "009_notification_delivery.sql",
-      "description": "Notification delivery layer (outbound_message, email_suppression, notification_preference, app_user.locale)"
+      "description": "Implement the notification delivery table"
     }
   ]
 }

@@ -1,0 +1,16 @@
+-- Migration: 2026-07-16 — index invoice issued_at for date-range list queries.
+--
+-- The invoice-list endpoints (GET /invoices, GET /invoices/mine) filter and sort
+-- by issued_at within a tenant. This adds a composite (id_community, issued_at)
+-- index so those range scans stay cheap.
+--
+-- Notes:
+--   * Version 1 of this database is `billing/scripts/sql/schema.sql`, which
+--     creates schema_version AND self-inserts (1, 'Billing initial schema').
+--     That is why this set starts at 2 and ships no bootstrap migration.
+--   * The index is also folded into that schema.sql (next to ix_invoice_status)
+--     so a fresh install and a migrated install converge. On a database built
+--     from schema.sql this migration is a no-op that records the version.
+--
+-- Idempotent: safe to re-run.
+CREATE INDEX IF NOT EXISTS ix_invoice_issued ON invoice (id_community, issued_at);

@@ -1,0 +1,9 @@
+{
+  "migrations": [
+    {
+      "version": 2,
+      "file": "002_wal_reference_data.sql",
+      "description": "Walloon (CWaPE) deadline rules and document template catalogue"
+    }
+  ]
+}

@@ -61,8 +61,6 @@
 -- Apply on existing databases with:
 --   psql -d <db> -f database_script/2026-08-03_notification_delivery.sql
 
-BEGIN;
-
 -- Channel-agnostic outbound queue. One row per (message, channel, recipient).
 CREATE TABLE IF NOT EXISTS outbound_message (
     id              BIGSERIAL PRIMARY KEY,
@@ -131,5 +129,3 @@ CREATE TABLE IF NOT EXISTS notification_preference (
 -- client-side and never persists it. Email has no other source of truth.
 ALTER TABLE app_user
     ADD COLUMN IF NOT EXISTS locale VARCHAR(8) NULL;
-
-COMMIT;

@@ -1,0 +1,9 @@
+{
+  "migrations": [
+    {
+      "version": 2,
+      "file": "002_invoice_issued_index.sql",
+      "description": "Index invoice (id_community, issued_at) for date-range list queries"
+    }
+  ]
+}

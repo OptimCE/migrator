@@ -22,8 +22,6 @@
 --
 -- Apply on existing databases with:
 --   psql -d <db> -f database_script/2026-06-11_notification.sql
-BEGIN;
-
 CREATE TABLE IF NOT EXISTS notification (
     id            BIGSERIAL PRIMARY KEY,
     id_community  INT REFERENCES community (id) ON DELETE CASCADE,
@@ -40,5 +38,3 @@ CREATE INDEX IF NOT EXISTS idx_notification_user_unread
     ON notification (id_user) WHERE read_at IS NULL;
 CREATE INDEX IF NOT EXISTS idx_notification_community
     ON notification (id_community);
-
-COMMIT;

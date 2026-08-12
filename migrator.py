@@ -120,6 +120,21 @@ async def get_current_version(engine: AsyncEngine) -> int:
 async def apply_migration(engine: AsyncEngine, migration: Migration) -> None:
     sql_text = migration.file.read_text(encoding="utf-8")
     async with engine.begin() as conn:
+        # Materialise the transaction BEFORE touching the raw connection.
+        #
+        # SQLAlchemy's asyncpg adapter opens the transaction lazily — on the first
+        # statement issued THROUGH the adapter. The migration below is executed on
+        # the raw asyncpg connection (simple query protocol, so a multi-statement
+        # file works), which bypasses the adapter entirely. Without this line no
+        # transaction is open when the DDL runs, so it commits in autocommit and
+        # the INSERT below ends up the only transactional statement: a failure
+        # there leaves applied DDL with no recorded version.
+        #
+        # Migration files must not open their own transaction for the same reason
+        # from the other side — a COMMIT inside the file ends this one early and
+        # reintroduces exactly that split. See README, "Adding a migration".
+        await conn.execute(text("SELECT 1"))
+
         raw = await conn.get_raw_connection()
         await raw.driver_connection.execute(sql_text)  # asyncpg simple query, multi-statement OK
         await conn.execute(

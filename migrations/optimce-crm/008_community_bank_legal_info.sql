@@ -12,8 +12,6 @@
 --
 -- Idempotent: safe to re-run.
 
-BEGIN;
-
 ALTER TABLE community
     ADD COLUMN IF NOT EXISTS vat_number VARCHAR(32) NULL;
 
@@ -25,5 +23,3 @@ ALTER TABLE community
 
 ALTER TABLE community
     ADD COLUMN IF NOT EXISTS account_holder_name VARCHAR(255) NULL;
-
-COMMIT;

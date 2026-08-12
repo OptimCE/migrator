@@ -19,8 +19,6 @@
 --
 -- Apply on existing databases with:
 --   psql -d <db> -f database_script/2026-05-27_audit_log.sql
-BEGIN;
-
 CREATE TABLE IF NOT EXISTS audit_log (
     id              BIGSERIAL PRIMARY KEY,
     id_community    INT REFERENCES community (id) ON DELETE CASCADE,
@@ -40,5 +38,3 @@ CREATE INDEX IF NOT EXISTS idx_audit_log_community_entity
     ON audit_log (id_community, entity_type, entity_id);
 CREATE INDEX IF NOT EXISTS idx_audit_log_community_action
     ON audit_log (id_community, action);
-
-COMMIT;

@@ -10,8 +10,6 @@
 -- DEFAULT of 'BE-WAL-CWAPE', which backfills every existing row, then kept NOT
 -- NULL. Idempotent: safe to re-run.
 
-BEGIN;
-
 ALTER TABLE community
     ADD COLUMN IF NOT EXISTS regulator VARCHAR(32) NOT NULL DEFAULT 'BE-WAL-CWAPE';
 
@@ -21,5 +19,3 @@ ALTER TABLE community
     CHECK (regulator IN ('BE-WAL-CWAPE', 'BE-BRU-BRUGEL', 'BE-VLA-VREG'));
 
 CREATE INDEX IF NOT EXISTS idx_community_regulator ON community (regulator);
-
-COMMIT;

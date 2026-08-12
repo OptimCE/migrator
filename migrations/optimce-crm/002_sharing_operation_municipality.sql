@@ -14,8 +14,6 @@
 -- Apply on existing databases with:
 --   psql -d <db> -f database_script/2026-05-03_sharing_operation_municipality.sql
 
-BEGIN;
-
 -- 1. Reference table for municipalities.
 CREATE TABLE IF NOT EXISTS municipality (
     nis_code   INT PRIMARY KEY,
@@ -62,5 +60,3 @@ CREATE TABLE IF NOT EXISTS sharing_operation_municipality (
 );
 CREATE INDEX IF NOT EXISTS idx_sharing_op_muni_nis
     ON sharing_operation_municipality (nis_code);
-
-COMMIT;

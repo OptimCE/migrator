@@ -1,0 +1,9 @@
+{
+  "migrations": [
+    {
+      "version": 2,
+      "file": "002_crm_source.sql",
+      "description": "Allow CRM-sourced simulations (source, sharing operation, period)"
+    }
+  ]
+}

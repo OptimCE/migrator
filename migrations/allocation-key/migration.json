@@ -1,0 +1,14 @@
+{
+  "migrations": [
+    {
+      "version": 2,
+      "file": "002_file_storage_key.sql",
+      "description": "Rename generation.file_url to file_storage_key, widen to 512"
+    },
+    {
+      "version": 3,
+      "file": "003_crm_source.sql",
+      "description": "Allow CRM-sourced generations (source, sharing operation, period)"
+    }
+  ]
+}

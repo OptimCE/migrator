@@ -44,6 +44,11 @@
       "version": 9,
       "file": "009_notification_delivery.sql",
       "description": "Implement the notification delivery table"
+    },
+    {
+      "version": 10,
+      "file": "010_address_geolocation.sql",
+      "description": "Address geolocation columns, constraints and municipality-centroid seed"
     }
   ]
 }

@@ -49,6 +49,11 @@
       "version": 10,
       "file": "010_address_geolocation.sql",
       "description": "Address geolocation columns, constraints and municipality-centroid seed"
+    },
+    {
+      "version": 11,
+      "file": "011_address_number_country_best.sql",
+      "description": "House numbers become text, plus country and the BeSt Address link"
     }
   ]
 }

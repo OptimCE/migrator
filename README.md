@@ -85,7 +85,7 @@ its files. They exist for the databases created *before* them.
 
 | set | starts at | top version here | upstream source |
 |---|---|---|---|
-| `optimce-crm`             | 1 | 10 | `crm-backend/database_script/*.sql` |
+| `optimce-crm`             | 1 | 12 | `crm-backend/database_script/*.sql` |
 | `allocation-key`          | 2 |  3 | `allocation-key-generation/scripts/sql/migrations/` |
 | `simulation-key`          | 2 |  2 | `simulation-key/scripts/sql/migrations/` |
 | `news-board`              | — |  — | `news-board/scripts/sql/` — nothing pending yet |

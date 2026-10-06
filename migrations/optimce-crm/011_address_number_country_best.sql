@@ -15,17 +15,24 @@
 --                      a user PICKS an address from the register, so a later
 --                      edit can tell a chosen address from a typed one.
 --
--- ORDERING — THE ONE THING THIS MIGRATION CANNOT ENFORCE FOR ITSELF.
--- Deploy the crm-backend image BEFORE running this. `address.number` is read
--- through the `houseNumberToString` transformer, so the API emits a string
--- whether the column is `int` or `varchar` — but only once that build is live.
--- Applied first, this flips the wire type of every address response underneath
--- a frontend that was not deployed for it.
+-- ORDERING — RUN THIS WITH crm-backend STOPPED. Neither build is safe against
+-- the other's schema, so the answer is to close the window, not to pick a side:
 --
--- That inverts the usual order in production/DATABASE_CONSOLIDATION.md §0.0,
--- which runs the migrator (§9.1) BEFORE §8's image pull. For this release the
--- image pull moves ahead of the migrator run. production/DEPLOYMENT_PLAN.md
--- Step 6b → Step 7 is already in the right order.
+--   * NEW image, OLD schema — hard failure. The `Address` entity declares
+--     `country` and `best_address_id`, and TypeORM's query builder selects every
+--     entity column by name, so every address read and write dies on
+--     `column address.country does not exist`.
+--   * OLD image, NEW schema — silent wrongness. `number` is varchar now and the
+--     old build has no `houseNumberToString` transformer, so the API emits
+--     `"12"` where the frontend expects `12`.
+--
+-- Stop crm-backend, run this, start it on the new image. That also removes the
+-- lock contention: the type change takes ACCESS EXCLUSIVE on `address`, and with
+-- lock_timeout at its default of 0 a live backend holding an open transaction
+-- makes the migrator wait forever.
+--
+-- See production/DEPLOYMENT_PLAN.md Step 7 and
+-- production/DATABASE_CONSOLIDATION.md §9.12 for the command sequence.
 --
 -- REVERSIBLE, but only for now: `ALTER COLUMN number TYPE INT USING
 -- number::integer` works while every stored value is still digits-only. Once

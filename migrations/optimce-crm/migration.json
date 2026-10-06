@@ -54,6 +54,11 @@
       "version": 11,
       "file": "011_address_number_country_best.sql",
       "description": "House numbers become text, plus country and the BeSt Address link"
+    },
+    {
+      "version": 12,
+      "file": "012_meter_ean_18_digits.sql",
+      "description": "meter.ean must be exactly 18 digits"
     }
   ]
 }

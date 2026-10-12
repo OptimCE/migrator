@@ -1,0 +1,27 @@
+-- Migration: 2026-10-11 — municipality_postal_code.created_at.
+--
+-- The `MunicipalityPostalCode` entity (crm-backend
+-- `src/modules/municipalities/domain/municipality.models.ts`) declares
+-- `@CreateDateColumn created_at`, and TypeORM selects every entity column by
+-- name, so loading a municipality with its postal codes fails on
+-- `column ... created_at does not exist` wherever the column is missing.
+--
+-- Migration 002 creates the table WITH the column, but behind
+-- `CREATE TABLE IF NOT EXISTS`, and the CRM base schema
+-- (`crm-backend/database_script/init.sql`, vendored by the production repo as
+-- `schemas/crm_db.sql`) created it WITHOUT one until this release. A database
+-- stood up from that base schema already had the table when 002 ran, so 002
+-- skipped it and the column never arrived. This adds it there.
+--
+-- Notes:
+--   * A no-op, beyond recording the version, on every database whose table 002
+--     created (one whose CRM predates the municipality feature).
+--   * `current_timestamp` is not volatile, so existing rows take the value of
+--     this ALTER without a table rewrite. The lock is ACCESS EXCLUSIVE, held for
+--     a catalogue update on a ~1,150-row reference table.
+--   * The base schema is fixed in the same release, so a fresh install and a
+--     migrated install converge.
+--
+-- Idempotent: safe to re-run.
+ALTER TABLE municipality_postal_code
+    ADD COLUMN IF NOT EXISTS created_at TIMESTAMP DEFAULT current_timestamp;

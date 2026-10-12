@@ -4,6 +4,11 @@
       "version": 2,
       "file": "002_invoice_issued_index.sql",
       "description": "Index invoice (id_community, issued_at) for date-range list queries"
+    },
+    {
+      "version": 3,
+      "file": "003_invoice_credited_status.sql",
+      "description": "Backfill CREDITED status on invoices corrected by an issued credit note"
     }
   ]
 }

@@ -59,6 +59,11 @@
       "version": 12,
       "file": "012_meter_ean_18_digits.sql",
       "description": "meter.ean must be exactly 18 digits"
+    },
+    {
+      "version": 13,
+      "file": "013_municipality_postal_code_created_at.sql",
+      "description": "municipality_postal_code.created_at, missing from the CRM base schema"
     }
   ]
 }

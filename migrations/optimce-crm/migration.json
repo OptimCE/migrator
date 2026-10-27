@@ -69,6 +69,11 @@
       "version": 14,
       "file": "014_meter_data_grd_provenance.sql",
       "description": "meter_data.grd stores stable DSO ids, plus grd_source and grd_data_version"
+    },
+    {
+      "version": 15,
+      "file": "015_user_onboarding.sql",
+      "description": "user_onboarding table for the in-app onboarding tours, existing users backfilled"
     }
   ]
 }

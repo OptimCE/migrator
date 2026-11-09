@@ -74,6 +74,31 @@
       "version": 15,
       "file": "015_user_onboarding.sql",
       "description": "user_onboarding table for the in-app onboarding tours, existing users backfilled"
+    },
+    {
+      "version": 16,
+      "file": "016_outbox_event.sql",
+      "description": "outbox_event: transactional outbox of the core's domain events"
+    },
+    {
+      "version": 17,
+      "file": "017_regulatory_link_status.sql",
+      "description": "regulatory_link_status: authorised state of operation meters and keys (btree_gist exclusion)"
+    },
+    {
+      "version": 18,
+      "file": "018_regulatory_status_withdrawn.sql",
+      "description": "regulatory_link_status: status 9 withdrawn, the status CHECK named ck_regulatory_link_status_code"
+    },
+    {
+      "version": 19,
+      "file": "019_regulatory_meter_alignment.sql",
+      "description": "regulatory_link_status: an episode written active turns the meter's waiting meter_data rows active (one status per meter)"
+    },
+    {
+      "version": 20,
+      "file": "020_community_representative_documents.sql",
+      "description": "community: representative (first name, last name, email), statutes_date, internal_rules_date"
     }
   ]
 }

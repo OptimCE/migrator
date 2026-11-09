@@ -85,12 +85,12 @@ its files. They exist for the databases created *before* them.
 
 | set | starts at | top version here | upstream source |
 |---|---|---|---|
-| `optimce-crm`             | 1 | 14 | `crm-backend/database_script/*.sql` |
+| `optimce-crm`             | 1 | 20 | `crm-backend/database_script/*.sql` |
 | `allocation-key`          | 2 |  3 | `allocation-key-generation/scripts/sql/migrations/` |
 | `simulation-key`          | 2 |  2 | `simulation-key/scripts/sql/migrations/` |
 | `news-board`              | — |  — | `news-board/scripts/sql/` — nothing pending yet |
 | `billing`                 | 2 |  3 | `billing/scripts/sql/migrations/` |
-| `administrative-document` | 2 |  2 | `administrative-document/scripts/sql/seeds/` |
+| `administrative-document` | 2 |  6 | `administrative-document/scripts/sql/seeds/` (2), `.../scripts/sql/migrations/` (3+) |
 
 **A manifest `description` must be byte-identical to the string the upstream
 `schema.sql` self-inserts for that version.** A fresh install writes it from

@@ -4,6 +4,26 @@
       "version": 2,
       "file": "002_wal_reference_data.sql",
       "description": "Walloon (CWaPE) deadline rules and document template catalogue"
+    },
+    {
+      "version": 3,
+      "file": "003_procedures_engine.sql",
+      "description": "Procedures engine: catalogue, changes, correspondence; July dossiers converted"
+    },
+    {
+      "version": 4,
+      "file": "004_july_lifecycle_removed.sql",
+      "description": "July lifecycle removed: every dossier is a procedure"
+    },
+    {
+      "version": 5,
+      "file": "005_generation_finals.sql",
+      "description": "Draft and final pieces: stages, pinned templates, sent pieces final"
+    },
+    {
+      "version": 6,
+      "file": "006_phase4.sql",
+      "description": "Phase 4: reminder ladder, reception address, summary setting"
     }
   ]
 }

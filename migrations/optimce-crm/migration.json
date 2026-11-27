@@ -99,6 +99,16 @@
       "version": 20,
       "file": "020_community_representative_documents.sql",
       "description": "community: representative (first name, last name, email), statutes_date, internal_rules_date"
+    },
+    {
+      "version": 21,
+      "file": "021_data_export.sql",
+      "description": "export_job / export_part: the data export (RGPD art. 15 and 20)"
+    },
+    {
+      "version": 22,
+      "file": "022_community_public_contact.sql",
+      "description": "community: public contact (contact_email, contact_phone) for the directory"
     }
   ]
 }

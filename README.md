@@ -1,10 +1,22 @@
-# OptimCE - Migrator
+<p align="center">
+  <img src="docs/logo.svg" alt="OptimCE logo" width="160">
+</p>
+
+# OptimCE — Migrator
+
+[![Website](https://img.shields.io/badge/Website-optimce.be-2e7d32.svg)](https://www.optimce.be/en/)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
 
 Applies sequential SQL migrations to OptimCE databases. Each target database tracks its
 schema with a `schema_version` table; the updater compares the current version against a
 manifest, then applies every newer SQL file in order, in a transaction.
 
 No Alembic. SQLAlchemy async + asyncpg, plain `.sql` files, hand-curated manifest.
+
+This tool is part of the [OptimCE](https://www.optimce.be/en/) platform. The
+development stack lives in the [monorepo](https://github.com/OptimCE/monorepo); an
+example of a production deployment is in
+[OptimCE/production](https://github.com/OptimCE/production).
 
 ## Layout
 
@@ -85,7 +97,7 @@ its files. They exist for the databases created *before* them.
 
 | set | starts at | top version here | upstream source |
 |---|---|---|---|
-| `optimce-crm`             | 1 | 20 | `crm-backend/database_script/*.sql` |
+| `optimce-crm`             | 1 | 22 | `crm-backend/database_script/*.sql` |
 | `allocation-key`          | 2 |  3 | `allocation-key-generation/scripts/sql/migrations/` |
 | `simulation-key`          | 2 |  2 | `simulation-key/scripts/sql/migrations/` |
 | `news-board`              | — |  — | `news-board/scripts/sql/` — nothing pending yet |
@@ -108,7 +120,7 @@ coupling that has already failed once. Note that the manifest **file** is what m
 this work: `load_migrations` raises `FileNotFoundError` on a missing `migration.json`,
 so an empty directory is not enough.
 
-A migration set is **not** a from-scratch schema. `optimce-crm` creates 9 of the CRM's 30
+A migration set is **not** a from-scratch schema. `optimce-crm` creates 14 of the CRM's 35
 tables and assumes the rest exist: migration 002 references `sharing_operation`, 005
 references `community`, 010 assumes `address`, and nothing here ever creates
 `update_changetimestamp_column()`. The base schema stands a database up; the migrator
@@ -255,3 +267,7 @@ The image's `ENTRYPOINT` is `python migrator.py`, so any flags (`--dry-run`, `--
 ```bash
 docker run --rm ... optimce-updater:dev --dry-run
 ```
+
+## License
+
+This project is licensed under the [Apache License 2.0](LICENSE).
